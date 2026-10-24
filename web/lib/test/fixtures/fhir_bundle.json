@@ -1,0 +1,475 @@
+{
+ "resourceType": "Bundle",
+ "type": "collection",
+ "entry": [
+  {
+   "fullUrl": "urn:uuid:0",
+   "resource": {
+    "resourceType": "Patient",
+    "id": "p1",
+    "name": [
+     {
+      "given": [
+       "Test"
+      ],
+      "family": "Person"
+     }
+    ],
+    "birthDate": "1980-01-01",
+    "gender": "other"
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:1",
+   "resource": {
+    "resourceType": "Condition",
+    "id": "c1",
+    "clinicalStatus": {
+     "coding": [
+      {
+       "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+       "code": "active"
+      }
+     ]
+    },
+    "verificationStatus": {
+     "coding": [
+      {
+       "code": "confirmed"
+      }
+     ]
+    },
+    "code": {
+     "coding": [
+      {
+       "system": "http://snomed.info/sct",
+       "code": "38341003",
+       "display": "Hypertensive disorder"
+      }
+     ]
+    },
+    "onsetDateTime": "2019-04-02",
+    "recordedDate": "2019-04-03"
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:2",
+   "resource": {
+    "resourceType": "Condition",
+    "id": "c2",
+    "verificationStatus": {
+     "coding": [
+      {
+       "code": "entered-in-error"
+      }
+     ]
+    },
+    "code": {
+     "text": "Mistake"
+    }
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:3",
+   "resource": {
+    "resourceType": "Medication",
+    "id": "m1",
+    "code": {
+     "text": "Lisinopril 10 MG Oral Tablet"
+    }
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:4",
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "mr1",
+    "status": "active",
+    "intent": "order",
+    "medicationReference": {
+     "reference": "Medication/m1"
+    },
+    "authoredOn": "2019-04-03",
+    "dosageInstruction": [
+     {
+      "text": "1 tablet daily"
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:5",
+   "resource": {
+    "resourceType": "MedicationRequest",
+    "id": "mr2",
+    "status": "active",
+    "intent": "order",
+    "contained": [
+     {
+      "resourceType": "Medication",
+      "id": "x",
+      "code": {
+       "text": "Contained med"
+      }
+     }
+    ],
+    "medicationReference": {
+     "reference": "#x"
+    }
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:6",
+   "resource": {
+    "resourceType": "MedicationStatement",
+    "id": "ms1",
+    "status": "active",
+    "medicationCodeableConcept": {
+     "coding": [
+      {
+       "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+       "code": "197361",
+       "display": "Amlodipine 5 MG Oral Tablet"
+      }
+     ]
+    },
+    "effectivePeriod": {
+     "start": "2020-01-01"
+    },
+    "dosage": [
+     {
+      "text": "once daily"
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:7",
+   "resource": {
+    "resourceType": "Immunization",
+    "id": "i1",
+    "status": "completed",
+    "vaccineCode": {
+     "coding": [
+      {
+       "system": "http://hl7.org/fhir/sid/cvx",
+       "code": "208",
+       "display": "COVID-19 vaccine"
+      }
+     ]
+    },
+    "occurrenceDateTime": "2021-04-01",
+    "lotNumber": "AB123",
+    "performer": [
+     {
+      "actor": {
+       "display": "Clinic A"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:8",
+   "resource": {
+    "resourceType": "AllergyIntolerance",
+    "id": "a1",
+    "clinicalStatus": {
+     "coding": [
+      {
+       "code": "active"
+      }
+     ]
+    },
+    "code": {
+     "text": "Penicillin"
+    },
+    "criticality": "high",
+    "category": [
+     "medication"
+    ],
+    "recordedDate": "2015-06-01",
+    "reaction": [
+     {
+      "manifestation": [
+       {
+        "text": "Hives"
+       }
+      ],
+      "severity": "moderate"
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:9",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o1",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2345-7",
+       "display": "Glucose [Mass/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Glucose [Mass/volume] in Serum or Plasma"
+    },
+    "effectiveDateTime": "2024-03-01T08:00:00Z",
+    "valueQuantity": {
+     "value": 105,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    },
+    "referenceRange": [
+     {
+      "low": {
+       "value": 70,
+       "unit": "mg/dL"
+      },
+      "high": {
+       "value": 99,
+       "unit": "mg/dL"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:10",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o2",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2345-7",
+       "display": "Glucose [Mass/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Glucose [Mass/volume] in Serum or Plasma"
+    },
+    "effectiveDateTime": "2023-03-01",
+    "valueQuantity": {
+     "value": 88,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    },
+    "referenceRange": [
+     {
+      "low": {
+       "value": 70,
+       "unit": "mg/dL"
+      },
+      "high": {
+       "value": 99,
+       "unit": "mg/dL"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:11",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o3",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2093-3",
+       "display": "Cholesterol [Mass/volume] in Serum or Plasma"
+      }
+     ],
+     "text": "Cholesterol [Mass/volume] in Serum or Plasma"
+    },
+    "effectiveDateTime": "2024-03-01",
+    "valueQuantity": {
+     "value": 180,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    },
+    "referenceRange": [
+     {
+      "text": "<200 mg/dL"
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:12",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o4",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "85354-9",
+       "display": "Blood pressure panel"
+      }
+     ],
+     "text": "Blood pressure panel"
+    },
+    "effectiveDateTime": "2024-03-02",
+    "component": [
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "8480-6",
+         "display": "Systolic blood pressure"
+        }
+       ]
+      },
+      "valueQuantity": {
+       "value": 128,
+       "unit": "mm[Hg]"
+      }
+     },
+     {
+      "code": {
+       "coding": [
+        {
+         "system": "http://loinc.org",
+         "code": "8462-4",
+         "display": "Diastolic blood pressure"
+        }
+       ]
+      },
+      "valueQuantity": {
+       "value": 82,
+       "unit": "mm[Hg]"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:13",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o5",
+    "status": "entered-in-error",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "2345-7",
+       "display": "Glucose"
+      }
+     ],
+     "text": "Glucose"
+    },
+    "effectiveDateTime": "2024-04-01",
+    "valueQuantity": {
+     "value": 999,
+     "unit": "mg/dL",
+     "system": "http://unitsofmeasure.org",
+     "code": "mg/dL"
+    }
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:14",
+   "resource": {
+    "resourceType": "Observation",
+    "id": "o6",
+    "status": "final",
+    "category": [
+     {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "laboratory"
+       }
+      ]
+     }
+    ],
+    "code": {
+     "coding": [
+      {
+       "system": "http://loinc.org",
+       "code": "5778-6",
+       "display": "Color of Urine"
+      }
+     ],
+     "text": "Color of Urine"
+    },
+    "effectiveDateTime": "2024-03-01",
+    "valueCodeableConcept": {
+     "text": "Yellow"
+    }
+   }
+  },
+  {
+   "fullUrl": "urn:uuid:15",
+   "resource": {
+    "resourceType": "Encounter",
+    "id": "e1",
+    "status": "finished"
+   }
+  }
+ ]
+}

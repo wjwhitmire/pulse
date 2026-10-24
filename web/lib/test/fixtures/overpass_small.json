@@ -1,0 +1,407 @@
+{
+ "version": 0.6,
+ "generator": "hand-made test fixture",
+ "osm3s": {
+  "copyright": "Synthetic data for tests; not real map data."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 100,
+   "lat": 45.0,
+   "lon": 7.0
+  },
+  {
+   "type": "node",
+   "id": 101,
+   "lat": 45.0,
+   "lon": 7.0012718
+  },
+  {
+   "type": "node",
+   "id": 102,
+   "lat": 45.0,
+   "lon": 7.0025436
+  },
+  {
+   "type": "node",
+   "id": 103,
+   "lat": 45.0,
+   "lon": 7.0038154
+  },
+  {
+   "type": "node",
+   "id": 104,
+   "lat": 45.0,
+   "lon": 7.0050872
+  },
+  {
+   "type": "node",
+   "id": 110,
+   "lat": 45.0009,
+   "lon": 7.0
+  },
+  {
+   "type": "node",
+   "id": 111,
+   "lat": 45.0009,
+   "lon": 7.0012718
+  },
+  {
+   "type": "node",
+   "id": 112,
+   "lat": 45.0009,
+   "lon": 7.0025436
+  },
+  {
+   "type": "node",
+   "id": 113,
+   "lat": 45.0009,
+   "lon": 7.0038154
+  },
+  {
+   "type": "node",
+   "id": 114,
+   "lat": 45.0009,
+   "lon": 7.0050872
+  },
+  {
+   "type": "node",
+   "id": 120,
+   "lat": 45.0018,
+   "lon": 7.0
+  },
+  {
+   "type": "node",
+   "id": 121,
+   "lat": 45.0018,
+   "lon": 7.0012718
+  },
+  {
+   "type": "node",
+   "id": 122,
+   "lat": 45.0018,
+   "lon": 7.0025436
+  },
+  {
+   "type": "node",
+   "id": 123,
+   "lat": 45.0018,
+   "lon": 7.0038154
+  },
+  {
+   "type": "node",
+   "id": 124,
+   "lat": 45.0018,
+   "lon": 7.0050872
+  },
+  {
+   "type": "node",
+   "id": 130,
+   "lat": 45.0027,
+   "lon": 7.0
+  },
+  {
+   "type": "node",
+   "id": 131,
+   "lat": 45.0027,
+   "lon": 7.0012718
+  },
+  {
+   "type": "node",
+   "id": 132,
+   "lat": 45.0027,
+   "lon": 7.0025436
+  },
+  {
+   "type": "node",
+   "id": 133,
+   "lat": 45.0027,
+   "lon": 7.0038154
+  },
+  {
+   "type": "node",
+   "id": 134,
+   "lat": 45.0027,
+   "lon": 7.0050872
+  },
+  {
+   "type": "node",
+   "id": 140,
+   "lat": 45.0036,
+   "lon": 7.0
+  },
+  {
+   "type": "node",
+   "id": 141,
+   "lat": 45.0036,
+   "lon": 7.0012718
+  },
+  {
+   "type": "node",
+   "id": 142,
+   "lat": 45.0036,
+   "lon": 7.0025436
+  },
+  {
+   "type": "node",
+   "id": 143,
+   "lat": 45.0036,
+   "lon": 7.0038154
+  },
+  {
+   "type": "node",
+   "id": 144,
+   "lat": 45.0036,
+   "lon": 7.0050872
+  },
+  {
+   "type": "node",
+   "id": 200,
+   "lat": 45.01,
+   "lon": 7.01
+  },
+  {
+   "type": "node",
+   "id": 201,
+   "lat": 45.0101,
+   "lon": 7.0101
+  },
+  {
+   "type": "way",
+   "id": 1,
+   "nodes": [
+    100,
+    101,
+    102,
+    103,
+    104
+   ],
+   "tags": {
+    "highway": "residential",
+    "name": "South Street"
+   }
+  },
+  {
+   "type": "way",
+   "id": 2,
+   "nodes": [
+    120,
+    121,
+    122,
+    123,
+    124
+   ],
+   "tags": {
+    "highway": "footway"
+   }
+  },
+  {
+   "type": "way",
+   "id": 3,
+   "nodes": [
+    100,
+    110,
+    120,
+    130,
+    140
+   ],
+   "tags": {
+    "highway": "residential"
+   }
+  },
+  {
+   "type": "way",
+   "id": 4,
+   "nodes": [
+    104,
+    114,
+    124,
+    134,
+    144
+   ],
+   "tags": {
+    "highway": "residential",
+    "oneway": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 5,
+   "nodes": [
+    140,
+    141,
+    142,
+    143,
+    144
+   ],
+   "tags": {
+    "highway": "motorway"
+   }
+  },
+  {
+   "type": "way",
+   "id": 6,
+   "nodes": [
+    102,
+    112,
+    122
+   ],
+   "tags": {
+    "highway": "service",
+    "access": "private"
+   }
+  },
+  {
+   "type": "way",
+   "id": 7,
+   "nodes": [
+    122,
+    132,
+    142
+   ],
+   "tags": {
+    "highway": "cycleway"
+   }
+  },
+  {
+   "type": "way",
+   "id": 8,
+   "nodes": [
+    110,
+    111,
+    112,
+    113,
+    114
+   ],
+   "tags": {
+    "highway": "path",
+    "bicycle": "no",
+    "surface": "dirt"
+   }
+  },
+  {
+   "type": "way",
+   "id": 9,
+   "nodes": [
+    121,
+    131
+   ],
+   "tags": {
+    "highway": "steps"
+   }
+  },
+  {
+   "type": "way",
+   "id": 10,
+   "nodes": [
+    130,
+    131,
+    132,
+    133,
+    134
+   ],
+   "tags": {
+    "highway": "residential",
+    "surface": "gravel"
+   }
+  },
+  {
+   "type": "way",
+   "id": 11,
+   "nodes": [
+    134,
+    144
+   ],
+   "tags": {
+    "__proto__": {
+     "polluted": "yes"
+    },
+    "highway": "footway",
+    "constructor": "x"
+   }
+  },
+  {
+   "type": "way",
+   "id": 12,
+   "nodes": [
+    111,
+    123
+   ],
+   "tags": {
+    "highway": "footway",
+    "foot": "no",
+    "bicycle": "designated"
+   }
+  },
+  {
+   "type": "way",
+   "id": 13,
+   "nodes": [
+    103,
+    113,
+    123
+   ],
+   "tags": {
+    "highway": "residential",
+    "oneway": "-1"
+   }
+  },
+  {
+   "type": "way",
+   "id": 14,
+   "nodes": [
+    101,
+    111
+   ],
+   "tags": {
+    "highway": "residential",
+    "oneway": "yes",
+    "oneway:bicycle": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 15,
+   "nodes": [
+    140,
+    999
+   ],
+   "tags": {
+    "highway": "footway"
+   }
+  },
+  {
+   "type": "way",
+   "id": 16,
+   "nodes": [
+    200,
+    201
+   ],
+   "tags": {
+    "highway": "footway"
+   }
+  },
+  {
+   "type": "way",
+   "id": 17,
+   "nodes": [
+    100,
+    111,
+    101,
+    100
+   ],
+   "tags": {
+    "building": "yes"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 1,
+   "members": [],
+   "tags": {
+    "type": "route"
+   }
+  }
+ ]
+}

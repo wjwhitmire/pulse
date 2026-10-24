@@ -1,0 +1,321 @@
+<nav class="nav" id="nav" aria-label="Main">
+<span class="brand"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#141a2c"/><g transform="translate(0 -14)"><clipPath id="sky-rail"><rect x="0" y="0" width="512" height="300"/></clipPath><circle cx="256" cy="300" r="118" fill="#ff8fb4" clip-path="url(#sky-rail)"/><path d="M84 300H198L226 236L262 344L290 282L306 300H428" fill="none" stroke="#eef0fa" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/><path d="M150 392H362" stroke="#a3adff" stroke-width="18" stroke-linecap="round" opacity=".9"/></g></svg></span>
+<a href="#today" id="nav-today" aria-current="page">{{icon:today}}Today</a>
+<a href="#log" id="nav-log">{{icon:log}}Log</a>
+<a href="#record" id="nav-record" class="rec-tab"><span class="dot">{{icon:record}}</span><span class="sr">Record</span></a>
+<a href="#trends" id="nav-trends">{{icon:trends}}Trends</a>
+<a href="#body" id="nav-body">{{icon:body}}Body</a>
+</nav>
+<main class="main" id="main">
+<header class="topbar"><span class="wordmark"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#141a2c"/><g transform="translate(0 -14)"><clipPath id="sky-a"><rect x="0" y="0" width="512" height="300"/></clipPath><circle cx="256" cy="300" r="118" fill="#ff8fb4" clip-path="url(#sky-a)"/><path d="M84 300H198L226 236L262 344L290 282L306 300H428" fill="none" stroke="#eef0fa" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/><path d="M150 392H362" stroke="#a3adff" stroke-width="18" stroke-linecap="round" opacity=".9"/></g></svg><h1 id="title">Pulse</h1></span><span class="grow"></span><span class="badge-example" id="example-badge" hidden>Example data</span><a class="iconbtn" href="#settings" id="nav-settings" aria-label="Settings, import and export">{{icon:settings}}</a></header>
+<p class="sr" id="lede">Pulse: a private training log. Activity analysis, training load, readiness inputs, sleep and strength from your own files, all on this device.</p>
+<p class="status" id="status" role="status" aria-live="polite"></p>
+
+<!-- ================= TODAY ================= -->
+<section class="view" id="view-today" aria-labelledby="today-h">
+<div class="view-head"><div><p class="label" id="today-date"></p><h2 id="today-h">Today</h2></div></div>
+<div class="grid g-12">
+<article class="card hero c-7" aria-label="Readiness and load">
+<div class="hero-call">
+<p class="label">Readiness inputs</p>
+<p class="key"><span class="num" id="ready-count">-</span><span class="of" id="ready-of">inside your usual range</span></p>
+<p class="call" id="ready-call"></p>
+</div>
+<div class="gauge" id="load-gauge" role="img" aria-label="Load today"></div>
+<ul class="horizons" id="horizons"></ul>
+<p class="notice">{{icon:info}}<span>Pulse compares you with your own last 60 days. It describes trends and is not medical advice. For symptoms such as chest pain, fainting or an unusual heartbeat, see a doctor.</span></p>
+</article>
+<div class="c-5 stack">
+<div class="metrics" id="today-metrics"></div>
+<div id="today-last"></div>
+</div>
+<article class="card c-6" id="today-suggest">
+<div class="card-h">{{icon:spark}}<h3>Suggested session</h3></div>
+<p class="label" id="suggest-intent"></p>
+<p class="call" id="suggest-session"></p>
+<p class="muted" id="suggest-reason"></p>
+<p class="notice">{{icon:info}}<span>A rule of thumb from your own load and readiness inputs. A heuristic, not coaching.</span></p>
+</article>
+<article class="card c-6" id="today-insights">
+<div class="card-h">{{icon:trends}}<h3>Notes from your numbers</h3></div>
+<ul class="rows" id="insights-list"></ul>
+</article>
+<article class="card c-6" id="today-goals">
+<div class="card-h">{{icon:check}}<h3>Goals</h3><span class="grow"></span><a class="link" href="#log/goals">Edit{{icon:chev}}</a></div>
+<div id="goals-today"></div>
+</article>
+<article class="card c-6" id="today-tonight">
+<div class="card-h">{{icon:sleep}}<h3>Tonight</h3></div>
+<p class="call" id="plan-text"></p>
+<p class="muted">Bedtime = wake time minus tonight's sleep need minus time to fall asleep. A web page cannot vibrate a band; add the bedtime to your calendar instead.</p>
+<div class="btn-row"><button type="button" class="btn primary" id="plan-ics-file">Add bedtime to my calendar (.ics)</button><button type="button" class="btn ghost" id="plan-ics">Copy as text</button></div>
+<textarea id="plan-ics-out" class="outbox" hidden readonly aria-label="Calendar event text"></textarea>
+</article>
+<article class="card c-12" id="today-coach"></article>
+<article class="card c-12" id="today-day">
+<div class="card-h">{{icon:time}}<h3>Day so far</h3></div>
+<div class="stats" id="day-stats"></div>
+<div id="stress-chart"></div>
+<p class="muted small">Daytime stress is descriptive: each hour's heart rate above your resting baseline as 0 to 3, one level higher when a daytime HRV reading is low. Heat, caffeine, posture and illness raise heart rate too.</p>
+</article>
+</div>
+</section>
+
+<!-- ================= LOG ================= -->
+<section class="view" id="view-log" aria-labelledby="log-h" hidden>
+<div class="view-head"><div><p class="label">Log</p><h2 id="log-h">Training log</h2></div><span class="grow"></span>
+<div class="seg-wrap"><div class="seg" id="log-seg" role="group" aria-label="Log section">
+<button type="button" id="log-s-acts" aria-pressed="true">Activities</button><button type="button" id="log-s-strength" aria-pressed="false">Strength</button><button type="button" id="log-s-journal" aria-pressed="false">Journal</button><button type="button" id="log-s-goals" aria-pressed="false">Goals</button>
+</div></div></div>
+
+<div id="log-acts" class="grid g-12">
+<article class="card c-12">
+<div class="card-h">{{icon:log}}<h3>Calendar</h3><span class="grow"></span>
+<label class="sr" for="cal-metric">Circle size</label><select id="cal-metric"><option value="time">Time</option><option value="distance">Distance</option><option value="elevation">Climb</option><option value="load">Load</option></select>
+<label class="sr" for="act-sport">Sport</label><select id="act-sport"><option value="all">All sports</option><option value="run">Run</option><option value="ride">Ride</option><option value="strength">Strength</option><option value="other">Other</option></select></div>
+<div class="tbl-wrap"><div id="calendar" class="calendar"></div></div>
+</article>
+<article class="card c-5"><div class="card-h"><h3>Activities</h3><span class="grow"></span><span class="muted small" id="act-count"></span></div><ul class="rows acts" id="act-list"></ul>
+<div class="btn-row"><button type="button" class="btn ghost" id="act-more" hidden>Show more</button></div></article>
+<div class="c-7 stack" id="act-detail" hidden>
+<div class="card">
+<div class="act-head"><span class="sport" id="ad-sport"></span><div><h3 id="ad-title">Activity</h3><p id="ad-meta"></p></div></div>
+<div class="stats" id="ad-stats"></div>
+</div>
+<div class="map" id="ad-map"><canvas id="ad-route" width="960" height="600" aria-label="Route on a plain background, north up, equal scale. No map tiles."></canvas><span class="map-chip" id="ad-map-chip" style="left:12px;top:12px">{{icon:lock}}No map tiles: route only</span></div>
+<div class="card"><div class="card-h">{{icon:elev}}<h3>Elevation</h3></div><div id="ad-ele"></div><p class="muted small" id="ad-elev"></p></div>
+<div class="card"><div class="card-h">{{icon:hr}}<h3>Heart rate</h3></div><div id="ad-hr"></div></div>
+<div class="card"><div class="card-h">{{icon:pace}}<h3 id="ad-pace-h">Pace</h3></div><div id="ad-pace"></div></div>
+<div class="card" id="ad-power-card"><div class="card-h">{{icon:load}}<h3>Power</h3></div><div id="ad-power"></div><div class="stats" id="ad-power-stats"></div></div>
+<div class="card" id="ad-cad-card"><div class="card-h">{{icon:time}}<h3>Cadence</h3></div><div id="ad-cad"></div></div>
+<div class="card"><div class="card-h"><h3>Time in zones</h3></div><div id="ad-zones"></div></div>
+<div class="card"><div class="card-h"><h3>Splits</h3></div><div class="tbl-wrap"><table class="splits" id="ad-splits"></table></div></div>
+<div class="card" id="ad-laps-card"><div class="card-h">{{icon:lap}}<h3>Laps</h3></div><div class="tbl-wrap"><table class="splits" id="ad-laps"></table></div></div>
+<div class="card"><div class="card-h"><h3>Fastest splits by distance</h3></div><div class="tbl-wrap"><table class="splits" id="ad-fast"></table></div></div>
+<div class="card"><div class="card-h">{{icon:route}}<h3>Same route before</h3></div><div class="tbl-wrap"><table class="splits" id="ad-repeat"></table></div></div>
+<div class="card"><div class="card-h">{{icon:route}}<h3>Segments</h3></div>
+<p class="muted small">Pick a stretch of this activity; Pulse finds the same stretch in your other activities by start and finish lines plus a 25 m corridor. Your own history only.</p>
+<div class="form">
+<div><label for="seg-from">Start (share of the activity)</label><input id="seg-from" type="range" min="0" max="100" value="20"></div>
+<div><label for="seg-to">Finish</label><input id="seg-to" type="range" min="0" max="100" value="40"></div>
+<div><label for="seg-name">Name</label><input id="seg-name" type="text" maxlength="80" value="My segment"></div>
+</div>
+<div class="btn-row"><button type="button" class="btn" id="seg-make">Save segment</button></div>
+<div class="tbl-wrap"><table class="splits" id="ad-segs"></table></div></div>
+<div class="card"><div class="card-h"><h3>Details</h3></div>
+<div class="form">
+<div><label for="ad-name">Name</label><input id="ad-name" type="text" maxlength="200"></div>
+<div><label for="ad-gear">Gear</label><select id="ad-gear"></select></div>
+</div>
+<p class="label" id="ad-rpe-label">Effort, 1 (very easy) to 10 (maximal)</p>
+<div class="rpe" id="ad-rpe" role="group" aria-labelledby="ad-rpe-label"></div>
+<p class="muted small">Effort sets the load of activities without heart rate (effort x minutes).</p>
+<div class="btn-row"><button type="button" class="btn primary" id="ad-save">Save</button><button type="button" class="btn" id="ad-gpx">{{icon:share}}Export GPX</button><button type="button" class="btn" id="ad-gpx-share">Export GPX with ends hidden</button><button type="button" class="btn ghost" id="ad-delete">{{icon:trash}}Delete</button></div>
+<div id="ad-confirm" class="confirm" hidden><p>Delete this activity from this device? This cannot be undone.</p><div class="btn-row"><button type="button" class="btn" id="ad-confirm-yes">Delete</button><button type="button" class="btn ghost" id="ad-confirm-no">Keep</button></div></div>
+</div>
+</div>
+</div>
+
+<div id="log-strength" class="grid g-12" hidden>
+<article class="card c-7"><div class="card-h">{{icon:strength}}<h3>Log a session</h3></div>
+<div class="form">
+<div><label for="st-date">Date</label><input id="st-date" type="date"></div>
+<div><label for="st-name">Session</label><input id="st-name" type="text" maxlength="80" value="Strength"></div>
+<div><label for="st-unit">Load unit</label><select id="st-unit"><option value="kg">kg</option><option value="lb">lb</option></select></div>
+</div>
+<div class="tbl-wrap"><table class="splits" id="st-sets"></table></div>
+<div class="btn-row"><button type="button" class="btn" id="st-add">{{icon:plus}}Add set</button><button type="button" class="btn primary" id="st-save">Save session</button></div>
+</article>
+<article class="card c-5"><div class="card-h"><h3>Personal records</h3></div>
+<p class="muted small">Estimated one-rep max by Epley, with Brzycki beside it. Least reliable above 10 reps.</p>
+<div class="tbl-wrap"><table class="splits" id="st-prs"></table></div>
+<div class="form"><div><label for="st-ex">Trend for</label><select id="st-ex"></select></div></div>
+<div id="st-trend"></div>
+</article>
+<article class="card c-12"><div class="card-h"><h3>Sessions</h3></div><div class="tbl-wrap"><table class="splits" id="st-list"></table></div></article>
+</div>
+
+<div id="log-journal" class="grid g-12" hidden>
+<article class="card c-5"><div class="card-h"><h3>Journal</h3></div>
+<p class="muted small">Answer yes or no for a day. With five of each within 90 days, Pulse compares the next morning's inputs. An association, not a cause.</p>
+<div class="form">
+<div><label for="jr-date">Day</label><input id="jr-date" type="date"></div>
+<div><label for="jr-tag">Question</label><input id="jr-tag" type="text" maxlength="120" list="jr-tags" value="Alcohol"><datalist id="jr-tags"></datalist></div>
+<div><label for="jr-yes">Answer</label><select id="jr-yes"><option value="1">Yes</option><option value="0">No</option></select></div>
+</div>
+<div class="btn-row"><button type="button" class="btn primary" id="jr-save">Save answer</button></div>
+</article>
+<article class="card c-7"><div class="card-h"><h3>Next-day HRV after yes and no days</h3></div><div class="tbl-wrap"><table class="splits" id="jr-assoc"></table></div></article>
+</div>
+
+<div id="log-goals" class="grid g-12" hidden>
+<article class="card c-6"><div class="card-h"><h3>Goals and personal challenges</h3></div>
+<div class="form">
+<div><label for="gl-metric">Measure</label><select id="gl-metric"><option value="distance">Distance (km)</option><option value="time">Time (h)</option><option value="elevation">Climb (m)</option><option value="sessions">Sessions</option></select></div>
+<div><label for="gl-period">Period</label><select id="gl-period"><option value="week">Week</option><option value="month">Month</option><option value="year">Year</option></select></div>
+<div><label for="gl-sport">Sport</label><select id="gl-sport"><option value="all">All</option><option value="run">Run</option><option value="ride">Ride</option><option value="strength">Strength</option></select></div>
+<div><label for="gl-target">Target</label><input id="gl-target" type="number" min="0" step="1" value="40"></div>
+</div>
+<div class="btn-row"><button type="button" class="btn primary" id="gl-save">{{icon:plus}}Add goal</button></div>
+<div id="gl-list"></div>
+</article>
+<article class="card c-6"><div class="card-h"><h3>Gear</h3></div>
+<div class="form">
+<div><label for="gr-name">Name</label><input id="gr-name" type="text" maxlength="80"></div>
+<div><label for="gr-kind">Kind</label><select id="gr-kind"><option value="shoe">Shoes</option><option value="bike">Bike</option></select></div>
+<div><label for="gr-start">Distance already (km)</label><input id="gr-start" type="number" min="0" step="1" value="0"></div>
+<div><label for="gr-retire">Retire at (km)</label><input id="gr-retire" type="number" min="0" step="10" value="700"></div>
+</div>
+<div class="btn-row"><button type="button" class="btn primary" id="gr-save">{{icon:plus}}Add gear</button></div>
+<div class="tbl-wrap"><table class="splits" id="gr-table"></table></div>
+</article>
+</div>
+</section>
+
+<!-- ================= RECORD ================= -->
+<section class="view" id="view-record" aria-labelledby="record-h" hidden>
+<div class="view-head"><div><p class="label">Record</p><h2 id="record-h">Record an activity</h2></div></div>
+<div id="record-root"></div>
+</section>
+
+<!-- ================= TRENDS ================= -->
+<section class="view" id="view-trends" aria-labelledby="trends-h" hidden>
+<div class="view-head"><div><p class="label">Trends</p><h2 id="trends-h">Training load and fitness</h2></div></div>
+<div class="grid g-12">
+<article class="card c-12">
+<div class="card-h">{{icon:load}}<h3>Long-term and short-term load</h3></div>
+<div class="stats" id="load-stats"></div>
+<div id="load-chart"></div>
+<div class="legend"><span><i></i>Long-term load (fitness)</span><span><i class="d"></i>Short-term load (fatigue)</span><span><i class="dot"></i>Daily load</span></div>
+<p class="muted small" id="load-note"></p>
+</article>
+<article class="card c-7"><div class="card-h"><h3>Weekly load against your usual</h3></div><div id="week-bars"></div>
+<div class="legend"><span><i class="b"></i>Your usual week (4-week mean plus or minus 1 SD)</span></div>
+<p class="muted small" id="ratio-text"></p></article>
+<article class="card c-5"><div class="card-h"><h3>Weeks</h3></div><div class="tbl-wrap"><table class="splits" id="weeks-table"></table></div></article>
+<article class="card c-12"><div class="card-h">{{icon:hr}}<h3>Fitness estimates</h3></div>
+<div class="stats" id="fit-stats"></div>
+<div class="tbl-wrap"><table class="splits" id="pred-table"></table></div>
+<p class="muted small">Estimates only. VO2max from resting and maximum heart rate (Uth 2004) and from your fastest running efforts (Daniels and Gilbert). Race times by Riegel's formula from the strongest effort. Fitness age compares the higher VO2max estimate with the FRIEND registry 50th percentile for your sex (Kaminsky 2022).</p></article>
+<article class="card c-6"><div class="card-h"><h3>Best power by duration</h3></div><div class="tbl-wrap"><table class="splits" id="mmp-table"></table></div></article>
+<article class="card c-6"><div class="card-h"><h3>Fastest times by distance</h3></div><div class="tbl-wrap"><table class="splits" id="pb-table"></table></div></article>
+<article class="card c-6"><div class="card-h"><h3>Months</h3></div><div class="tbl-wrap"><table class="splits" id="months-table"></table></div></article>
+<article class="card c-6"><div class="card-h"><h3>Year in review</h3><span class="grow"></span><label class="sr" for="yr-select">Year</label><select id="yr-select"></select></div><div class="stats" id="yr-stats"></div><div id="yr-months"></div></article>
+<article class="card c-12"><div class="card-h">{{icon:map}}<h3>Personal heatmap</h3></div>
+<div class="map heat"><canvas id="heatmap" width="1200" height="750" aria-label="Every track on one canvas"></canvas></div>
+<p class="muted small">Every track you have drawn on one canvas, counts equalised so busy and quiet paths both show. Your own data only; no map tiles.</p></article>
+<article class="card c-12"><div class="card-h"><h3>Possible workouts in all-day heart rate</h3></div>
+<p class="muted small">Blocks of 10 minutes or more above 30 % of heart rate reserve that no saved activity covers. Nothing is saved until you add one.</p>
+<div class="tbl-wrap"><table class="splits" id="detect-table"></table></div></article>
+</div>
+</section>
+
+<!-- ================= BODY ================= -->
+<section class="view" id="view-body" aria-labelledby="body-h" hidden>
+<div class="view-head"><div><p class="label">Body</p><h2 id="body-h">Sleep and readiness</h2></div><span class="grow"></span>
+<div class="seg-wrap"><div class="seg" id="body-seg" role="group" aria-label="Body section">
+<button type="button" id="body-s-sleep" aria-pressed="true">Sleep</button><button type="button" id="body-s-ready" aria-pressed="false">Readiness</button><button type="button" id="body-s-log" aria-pressed="false">Body</button><button type="button" id="body-s-health" aria-pressed="false">Records</button>
+</div></div></div>
+
+<div id="body-sleep" class="grid g-12">
+<article class="card c-12 sleep-hero">
+<div class="ring" id="sleep-ring" role="img" aria-label="Sleep against need"></div>
+<div class="stack">
+<p class="call" id="sleep-call"></p>
+<div class="eq" id="sleep-eq" aria-label="Sleep need equation"></div>
+<div class="stages" id="sleep-stages"></div>
+<p class="notice">{{icon:info}}<span>Sleep stages are shown as your device scored them; Pulse does not compute stages. Not medical advice.</span></p>
+</div>
+</article>
+<article class="card c-7"><div class="card-h">{{icon:sleep}}<h3>Sleep against need</h3></div><div id="sleep-chart"></div></article>
+<article class="card c-5"><div class="card-h"><h3>Last night</h3></div><div class="stats three" id="sleep-stats"></div></article>
+</div>
+
+<div id="body-ready" class="grid g-12" hidden>
+<article class="card c-12"><div class="card-h">{{icon:hrv}}<h3 id="hrv-h">HRV, rMSSD, ms</h3></div><div id="hrv-chart" class="tall-wrap"></div>
+<div class="legend"><span><i class="dot"></i>Night or morning value</span><span><i class="h"></i>7-day average</span><span><i class="b"></i>Your usual range</span></div>
+<p class="muted small" id="hrv-hint"></p></article>
+<article class="card c-6"><div class="card-h">{{icon:rhr}}<h3>Resting heart rate</h3></div><div id="rhr-chart"></div></article>
+<article class="card c-6"><div class="card-h">{{icon:breath}}<h3>Vitals against your usual</h3></div><div class="tbl-wrap"><table class="splits" id="vitals-table"></table></div>
+<p class="muted small">Each value against the median of the previous 60 days; z is in robust standard deviations (1.4826 x median absolute deviation). Values beyond 2 are in bold.</p></article>
+<article class="card c-12"><div class="card-h"><h3>Readiness inputs, last 14 days</h3></div><p class="muted small">HRV is the 7-day mean in ms, RHR the 3-day resting heart rate, Sleep last night against need. Values outside your usual range are in bold.</p><div class="tbl-wrap"><table class="splits" id="ready-history"></table></div>
+<p class="notice">{{icon:info}}<span>Pulse compares you with your own last 60 days. It describes trends and is not medical advice.</span></p></article>
+</div>
+
+<div id="body-log" class="grid g-12" hidden>
+<article class="card c-7"><div class="card-h"><h3>Weight and blood pressure</h3></div>
+<div class="form">
+<div><label for="bd-date">Day</label><input id="bd-date" type="date"></div>
+<div><label for="bd-kg">Weight (kg)</label><input id="bd-kg" type="number" step="0.1" min="20" max="400"></div>
+<div><label for="bd-sys">Systolic (mmHg)</label><input id="bd-sys" type="number" step="1" min="60" max="260"></div>
+<div><label for="bd-dia">Diastolic (mmHg)</label><input id="bd-dia" type="number" step="1" min="30" max="160"></div>
+</div>
+<div class="btn-row"><button type="button" class="btn primary" id="bd-save">Save entry</button></div>
+<div id="bd-chart"></div><p class="muted" id="bd-text"></p>
+<p class="notice">{{icon:info}}<span>Manual entries and imports, shown as trends. Not medical advice.</span></p></article>
+<article class="card c-5"><div class="card-h"><h3>Cycle</h3></div>
+<p class="muted small">Enter the first day of each period. Phases are calendar estimates: ovulation is placed 14 days before the next expected start. Stored on this device only.</p>
+<div class="form"><div><label for="cy-date">Period start</label><input id="cy-date" type="date"></div></div>
+<div class="btn-row"><button type="button" class="btn primary" id="cy-save">Add</button></div>
+<div class="set-row"><span class="ic">{{icon:info}}</span><span class="t">Shade estimated phases on charts</span><span class="switch"><input type="checkbox" id="cy-overlay" aria-label="Shade estimated phases on charts"><span class="tr"></span><span class="th"></span></span></div>
+<p id="cy-text"></p></article>
+</div>
+
+<div id="body-health" class="grid g-12" hidden>
+<div id="health-root" class="c-12 stack"></div>
+</div>
+</section>
+
+<!-- ================= SETTINGS ================= -->
+<section class="view" id="view-settings" aria-labelledby="settings-h" hidden>
+<div class="view-head"><div><p class="label">Settings</p><h2 id="settings-h">Import, export and settings</h2></div></div>
+<div class="grid g-12">
+<article class="card c-12" id="import-card"><div class="card-h">{{icon:import}}<h3>Import</h3></div>
+<p class="call">Files are read on this device. Nothing is uploaded.</p>
+<div class="import-any"><label for="in-any">Import any files: Apple Health, Strava or Whoop exports, GPX, TCX, FIT, CSVs, health records or a Pulse backup. Pulse works out what each file is.</label><input id="in-any" type="file" multiple></div>
+<details class="import-more"><summary>Choose the file type yourself</summary>
+<div class="imports">
+<div><label for="in-acts">Activity files: GPX, TCX, FIT (50 MB each)</label><input id="in-acts" type="file" multiple accept=".gpx,.tcx,.fit"></div>
+<div><label for="in-folder">A folder of activity files</label><input id="in-folder" type="file" multiple webkitdirectory></div>
+<div><label for="in-health">Apple Health export: export.zip or export.xml (200 MB)</label><input id="in-health" type="file" accept=".zip,.xml"></div>
+<div><label for="in-strava">Strava bulk export (.zip)</label><input id="in-strava" type="file" accept=".zip"></div>
+<div><label for="in-whoop">Whoop export CSVs (select the four files)</label><input id="in-whoop" type="file" multiple accept=".csv"></div>
+<div><label for="in-daily">Daily CSV: date, hrv_ms, resting_hr, sleep_hours</label><input id="in-daily" type="file" accept=".csv,.txt"></div>
+<div><label for="in-dem">Elevation points CSV (lat, lon, elevation) to correct climbs</label><input id="in-dem" type="file" accept=".csv,.txt"></div>
+<div><label for="in-backup">Pulse backup (JSON)</label><input id="in-backup" type="file" accept=".json"></div>
+</div>
+</details>
+<div class="progress" id="progress" hidden><progress id="progress-bar" max="1" value="0"></progress><span id="progress-text" class="muted"></span><button type="button" class="btn" id="progress-cancel">Cancel</button></div>
+<ul class="rows log" id="import-log"></ul>
+</article>
+<article class="card c-6"><div class="card-h">{{icon:export}}<h3>Export</h3></div>
+<p class="muted">Everything Pulse keeps, in open formats.</p>
+<div class="btn-row"><button type="button" class="btn" id="ex-json">Everything as JSON</button><button type="button" class="btn" id="ex-zip">Everything plus original files (.zip)</button></div>
+<div class="btn-row"><button type="button" class="btn ghost" id="ex-csv-acts">Copy activities as CSV</button><button type="button" class="btn ghost" id="ex-csv-daily">Copy daily data as CSV</button></div>
+<textarea id="ex-out" class="outbox" hidden readonly aria-label="Export text"></textarea>
+</article>
+<article class="card c-6"><div class="card-h">{{icon:trash}}<h3>Delete</h3></div>
+<p class="muted">Remove every activity, daily record, log entry and setting from this device.</p>
+<div class="btn-row"><button type="button" class="btn" id="del-all">Delete all data</button></div>
+<div id="del-confirm" class="confirm" hidden><p>Delete everything Pulse stores on this device? Export first if you want a copy. This cannot be undone.</p>
+<div class="btn-row"><button type="button" class="btn" id="del-yes">Delete everything</button><button type="button" class="btn ghost" id="del-no">Keep my data</button></div></div>
+</article>
+<article class="card c-12"><div class="card-h">{{icon:settings}}<h3>You and your zones</h3></div>
+<div id="auto-note" class="auto-note" hidden></div>
+<div class="form" id="settings-form"></div>
+<div class="btn-row"><button type="button" class="btn primary" id="settings-save">Save and recompute</button>
+<span class="seg" role="group" aria-label="Theme"><button type="button" id="theme-auto" aria-pressed="true">Auto</button><button type="button" id="theme-light" aria-pressed="false">Light</button><button type="button" id="theme-dark" aria-pressed="false">Dark</button></span></div>
+</article>
+<article class="card c-12" id="network-card"><div class="card-h">{{icon:lock}}<h3>Network features</h3><span class="grow"></span><span class="muted small">All off by default</span></div>
+<p class="muted">With every switch off, Pulse makes no network requests. Each switch names the hosts it may contact and what they learn. Any host you contact sees your IP address.</p>
+<ul class="set-group" id="network-list"></ul>
+</article>
+</div>
+</section>
+
+<footer class="foot" id="foot">
+<details id="method"><summary>Method and limits</summary><div id="method-body"></div></details>
+<p>Built by Will Whitmire. Runs entirely in your browser; nothing you enter is uploaded.</p>
+<p class="maker">W. Whitmire / Field Tools / No. 14</p>
+</footer>
+</main>
